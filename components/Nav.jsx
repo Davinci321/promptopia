@@ -21,7 +21,7 @@ const Nav =  () => {
     if (user.emailAddresses) {
       //send user data to backend for storage
       //send user data to backend for storage
-      axios.post('/api/users', {userData: user})
+      axios.post('/api/user', {userData: user})
       .then(response => {
         console.log("data successfully stored", response)
       }).catch(error=>{
