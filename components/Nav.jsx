@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect} from "react";
 import {useClerk, useUser} from "@clerk/nextjs";
-import axios from "axios";
 
 
 const Nav =  () => {
@@ -13,24 +12,21 @@ const Nav =  () => {
   const { signOut } = useClerk();
   const { user } = useUser();
 
-  useEffect(() => {
-    if (user) {
-      console.log("User data available: ", user)
-
-    // Check if the user has an email address
-    if (user.emailAddresses) {
-      //send user data to backend for storage
-      //send user data to backend for storage
-      axios.post('/api/user', {userData: user})
-      .then(response => {
-        console.log("data successfully stored", response)
-      }).catch(error=>{
-        console.log("error storing user data:",error)
-      });
+  const handleSignIn = async() =>{
+    try{
+      const response = await fetch("/api/user",{
+        method: "POST",
+        body: JSON.stringify({
+          userData: user
+        })
+      })
+      if(response.ok){
+          console.log("User created successfully")
+      }
+    }catch(error){
+      console.log(error)
     }
   }
-  },[user])
-  
   return (
     <nav className='flex-between w-full mb-16 pt-3'>
       <Link href='/' className='flex gap-2 flex-center'>
@@ -49,7 +45,7 @@ const Nav =  () => {
         {user ? (
           <div className='flex gap-3 md:gap-5'>
             <Link href='/create-prompt' className='black_btn'>
-              Create Post
+              Create Prompt
             </Link>
 
             <button type='button'  className='outline_btn' onClick={()=> signOut()}>
@@ -72,6 +68,7 @@ const Nav =  () => {
                 <button
                   type='button'
                   className='black_btn'
+                  onClick={handleSignIn}
                 >
                   Sign in
                 </button>
@@ -130,6 +127,7 @@ const Nav =  () => {
             <button
                   type='button'
                   className='black_btn'
+                  onClick={handleSignIn}
                 >
                   Sign in
                 </button>
