@@ -1,6 +1,16 @@
 import { Schema, model, models } from 'mongoose';
+import mongoose from 'mongoose';
 
 const UserSchema = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    default: () => new mongoose.Types.ObjectId(), // Use a function to generate a new ObjectId
+  },
+  userId:
+  {type: 'string',
+    required: [true, "UserId is required!"],
+    unique: [true, "UserId already exists!"]
+  },
   email: {
     type: String,
     unique: [true, 'Email already exists!'],

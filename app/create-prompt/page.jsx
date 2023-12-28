@@ -1,12 +1,13 @@
 "use client"
 
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useUser} from "@clerk/nextjs";
 import Form from "@components/Forms";
 
 const CreatePrompt = () => {
     const {user} = useUser();
+    const router = useRouter();
  
     const [submitting, setSubmitting] = useState(false);
     const [post, setPost] = useState({
@@ -25,11 +26,14 @@ const CreatePrompt = () => {
                     userId: user?.id,
                     prompt: post.prompt,
                     tag: post.tag
-                })
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
             })
 
             if(response.ok){
-                Router.push("/");
+                router.push("/");
             }
         }catch(error){
             console.log(error);

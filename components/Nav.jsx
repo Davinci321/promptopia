@@ -11,14 +11,36 @@ const Nav =  () => {
 
   const { signOut } = useClerk();
   const { user } = useUser();
+  console.log(user);
 
   const handleSignIn = async() =>{
+
+    if (!user) {
+      console.log('No user found');
+      return;
+    }
+
+    const { id, username, imageUrl, emailAddresses } = user;
+
+
+    if (!emailAddresses || emailAddresses.length === 0) {
+      console.log('No email addresses found or array is empty');
+      return;
+    }
+    const emailAddress = emailAddresses[0].emailAddress;
+
     try{
       const response = await fetch("/api/user",{
         method: "POST",
         body: JSON.stringify({
-          userData: user
-        })
+          userId: id,
+          email: emailAddress,
+          username: username || '', // Ensure it's not null
+          imageUrl: imageUrl || '', // Ensure it's not null
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
       })
       if(response.ok){
           console.log("User created successfully")
@@ -27,6 +49,14 @@ const Nav =  () => {
       console.log(error)
     }
   }
+
+  useEffect(() => {
+    // Check if user exists and then call handleSignIn
+    if (user) {
+      handleSignIn();
+    }
+  }, [user]);
+
   return (
     <nav className='flex-between w-full mb-16 pt-3'>
       <Link href='/' className='flex gap-2 flex-center'>
@@ -68,7 +98,6 @@ const Nav =  () => {
                 <button
                   type='button'
                   className='black_btn'
-                  onClick={handleSignIn}
                 >
                   Sign in
                 </button>
