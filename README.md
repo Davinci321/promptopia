@@ -1,1 +1,1 @@
-# promtopia
+# promptopia
