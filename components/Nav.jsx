@@ -11,7 +11,6 @@ const Nav =  () => {
 
   const { signOut } = useClerk();
   const { user } = useUser();
-  console.log(user);
 
   const handleSignIn = async() =>{
 

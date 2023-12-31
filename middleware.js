@@ -5,7 +5,7 @@ import { authMiddleware } from "@clerk/nextjs";
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
 export default authMiddleware({
   publicRoutes: ["/","/sign-in"],
-  ignoredRoutes: ["/api/user","api/prompt"], // Exclude /api/user from protected routes
+  ignoredRoutes: ["/api/user","api/prompt","api/users"], // Exclude /api/user from protected routes
 });
  
 export const config = {

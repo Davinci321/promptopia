@@ -14,7 +14,7 @@ export const POST = async(req, res) =>{
             return new Response("User not found", { status: 404 });
         }
 
-        const newPrompt = new Prompt({creator: user._Id, prompt, tag})
+        const newPrompt = new Prompt({creator: user._id, prompt, tag})
         await newPrompt.save();
 
         return new Response(JSON.stringify(newPrompt), {status: 201});

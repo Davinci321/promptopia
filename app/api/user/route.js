@@ -1,6 +1,5 @@
 import { connectToDB } from "@utility/database";
 import User from "@models/user";
-import mongoose from "mongoose";
 
 export const POST = async (req) => {
   const { userId, email, username, imageUrl } = await req.json();

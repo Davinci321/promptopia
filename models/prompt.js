@@ -4,7 +4,7 @@ const {Schema, model, models} = mongoose;
 
 const promptSchema = new Schema({
     creator:{
-        type: mongoose.Schema.Types.String,
+        type: mongoose.Schema.Types.ObjectId,
         ref:"User"
     },
     prompt:{

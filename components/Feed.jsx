@@ -4,12 +4,16 @@ import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 
 const PromptCardList = ({data, handleTagClick}) => {
+  if (!data || data.length === 0) {
+    return null; 
+  }
+
   return (
     <div className="mt-16 prompt_layout">
       {
-        data.map((datum)=>{
-          <PromptCard key={datum._id} data={datum} handleTagClick={handleTagClick}/>
-        })
+        data.map((post)=> (
+          <PromptCard key={post._id} post={post} handleTagClick={handleTagClick}/>
+        ))
       }
     </div>
   )
@@ -39,10 +43,10 @@ export const Feed = () => {
       </form>
 
       <PromptCardList
-        data={[posts]}
+        data={posts}
         handleTagClick={() => {}}
       />
-      
+      <PromptCard/>
      </section>
   )
 }
