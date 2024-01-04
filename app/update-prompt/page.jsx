@@ -29,15 +29,18 @@ const EditPrompt = () => {
         if(promptId) getPromptDetails();
     }, [promptId])
 
-    const createPrompt = async (e)=> {
+    const EditPrompt = async (e)=> {
         e.preventDefault();
         setSubmitting(true);
 
+        if(!promptId){
+           return alert("Prompt Id not found!");
+        }
+
         try{
-            const response = await fetch("/api/prompt/new",{
-                method: "POST",
+            const response = await fetch(`/api/prompt/${promptId}`,{
+                method: "PATCH",
                 body: JSON.stringify({
-                    userId: user?.id,
                     prompt: post.prompt,
                     tag: post.tag
                 }),
@@ -58,7 +61,7 @@ const EditPrompt = () => {
 
   return (
     <Form
-    type="Create"
+    type="Edit"
     post={post}
     setPost={setPost}
     submiiting={submitting}
