@@ -21,9 +21,4 @@ npm install promotopia
 
 ## Contributing
 
-We welcome contributions from the community! Whether it's bug fixes, feature enhancements, or feedback, please feel free to contribute.
-
-## License
-
-This project is licensed under the [MIT License].
-
+I welcome contributions from the community! Whether it's bug fixes, feature enhancements, or feedback, please feel free to contribute.
