@@ -1,7 +1,3 @@
-Absolutely, here's an enhanced GitHub README for Promotopia:
-
----
-
 # Promotopia
 
 ## Introduction
